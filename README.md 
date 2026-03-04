@@ -1,0 +1,227 @@
+# 📈 Real-Time Market Dashboard
+
+A full-stack real-time trading dashboard built with **Node.js, Express, WebSocket, React, TypeScript, and Recharts**.
+
+The application simulates a stock/crypto market environment with:
+
+- REST APIs for tickers and historical data
+- WebSocket-based real-time price updates
+- Interactive chart visualization
+- Clean modular architecture
+
+---
+
+## 🚀 Project Overview
+
+This project simulates a simplified trading dashboard where users can:
+
+- View a list of available tickers
+- Select a ticker to see its historical price chart
+- Observe live price updates via WebSocket
+
+The backend simulates price movements in memory, while the frontend displays both historical and real-time data.
+
+The goal was to design a clean, scalable architecture that resembles real-world trading systems.
+
+---
+
+## 🏗️ Tech Stack
+
+### Backend
+- Node.js
+- Express
+- TypeScript
+- WebSocket (ws)
+- In-memory data using Map
+
+### Frontend
+- React (Vite)
+- TypeScript
+- Axios
+- Recharts
+- WebSocket API
+
+---
+
+## 📂 Project Structure
+
+root/
+├── server/ # Backend (REST + WebSocket)
+├── client/ # Frontend (React Dashboard)
+└── README.md
+
+
+### Backend Structure
+
+
+server/
+├── data/ # Mock market data
+├── services/ # Business logic
+├── routes/ # API routes
+├── pricesocket.ts # WebSocket logic
+└── server.ts # App entry point
+
+
+### Frontend Structure
+
+
+client/src/
+├── components/
+│ ├── TickerList.tsx
+│ ├── PriceChart.tsx
+│ └── LivePrice.tsx
+├── services/
+│ └── api.ts
+├── types/
+│ └── market.ts
+└── App.tsx
+
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the repository
+
+
+git clone <repo-url>
+cd <project-folder>
+
+
+---
+
+### 2️⃣ Backend Setup
+
+
+cd server
+npm install
+npm run dev
+
+
+Backend runs on:
+
+
+http://localhost:4000
+
+
+Test health endpoint:
+
+
+http://localhost:4000/api/health
+
+
+---
+
+### 3️⃣ Frontend Setup
+
+
+cd client
+npm install
+
+
+Create a `.env` file inside `client/`:
+
+
+VITE_API_BASE_URL=http://localhost:4000/api
+
+
+Then run:
+
+
+npm run dev
+
+
+Frontend runs on:
+
+
+http://localhost:5173
+
+
+---
+
+## 🧪 Running Tests
+
+Currently, automated tests are not implemented.
+
+To manually test the application:
+
+1. Start backend
+2. Start frontend
+3. Verify:
+   - Ticker list loads
+   - Selecting ticker loads historical chart
+   - Live price updates automatically via WebSocket
+
+Future improvements could include:
+- Unit tests for services
+- Integration tests for API routes
+- Component tests using React Testing Library
+
+---
+
+## ⚖️ Assumptions & Trade-offs
+
+### 1. In-Memory Data Store
+The backend uses an in-memory `Map` to store tickers and simulate price updates.
+
+Trade-off:
+- Simple and fast for demonstration
+- Not persistent (resets on restart)
+- No database integration
+
+### 2. Simulated Market Data
+Price updates are simulated at intervals rather than using real financial APIs.
+
+Trade-off:
+- Keeps the project self-contained
+- Avoids dependency on third-party services
+
+### 3. Single WebSocket Stream
+All price updates are broadcasted without subscription-based filtering.
+
+Trade-off:
+- Simpler implementation
+- In real-world systems, subscription-based streaming would improve scalability
+
+### 4. No Authentication
+The application assumes an open-access environment.
+
+Trade-off:
+- Simplifies architecture
+- Not production-secure
+
+---
+
+## 🌟 Bonus Features Implemented
+
+- ✅ WebSocket real-time price updates
+- ✅ Historical price chart using Recharts
+- ✅ Clean separation of concerns (services, routes, components, types)
+- ✅ Environment-based configuration
+- ✅ TypeScript across frontend and backend
+- ✅ Modular and scalable folder structure
+
+---
+
+## 🚀 Future Improvements
+
+- Subscription-based WebSocket streaming
+- Database integration (PostgreSQL or MongoDB)
+- Docker support
+- Unit & integration tests
+- UI styling improvements (Tailwind or Material UI)
+- Deployment to cloud (AWS / Vercel / Render)
+
+---
+
+## 📌 Conclusion
+
+This project demonstrates:
+
+- Full-stack TypeScript development
+- Real-time WebSocket integration
+- Clean layered architecture
+- React data visualization
+- Practical API design
+
+It reflects production-like design principles while remaining simple and maintainable.
