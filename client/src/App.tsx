@@ -7,12 +7,12 @@ function App() {
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
 
   return (
-    <div style={{ display: "flex", padding: "20px" }}>
-      <div style={{ width: "30%", borderRight: "1px solid #ddd" }}>
+    <div style={{ display: "flex", height: "100vh", fontFamily: "Arial, sans-serif" }}>
+      <div style={{ width: "25%", borderRight: "1px solid #ddd", overflowY: "auto", padding: "20px", backgroundColor: "#fafafa" }}>
         <TickerList onSelect={setSelectedSymbol} />
       </div>
 
-      <div style={{ width: "70%", padding: "20px" }}>
+      <div style={{ width: "75%", padding: "30px" }}>
         {selectedSymbol ? (
           <>
             <LivePrice symbol={selectedSymbol} />
