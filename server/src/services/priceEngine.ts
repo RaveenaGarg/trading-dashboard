@@ -1,18 +1,17 @@
-import { HistoricalPrice } from "../models/ticker";
-import { initialTickers } from "../data/mockTickers";
+import { tickers } from "../data/mockTickers";
+import { HistoricalPrice, Ticker } from "../models/ticker";
 
-const tickers = new Map<string, number>(initialTickers);
 
-export function getTickers(): string[] {
-  return Array.from(tickers.keys());
+export function getTickers(): Ticker[] {
+  return Array.from(tickers.values());
 }
 
 export function getCurrentPrice(symbol: string): number | null {
-  return tickers.get(symbol) ?? null;
+  return tickers.get(symbol)?.price ?? null;
 }
 
 export function getHistoricalData(symbol: string): HistoricalPrice[] {
-  const basePrice = tickers.get(symbol);
+  const basePrice = tickers.get(symbol)?.price;
 
   if (basePrice == undefined) {
     throw new Error("Ticker not found");
@@ -27,7 +26,7 @@ export function getHistoricalData(symbol: string): HistoricalPrice[] {
 }
 
 export function simulatePriceUpdate(symbol: string): number {
-  const currentPrice = tickers.get(symbol);
+  const currentPrice = tickers.get(symbol)?.price;
 
   if (currentPrice == undefined) {
     throw new Error("Ticker not found");
@@ -36,7 +35,8 @@ export function simulatePriceUpdate(symbol: string): number {
   const change = (Math.random() - 0.5) * 2;
   const updatedPrice = Number((currentPrice + change).toFixed(2));
 
-  tickers.set(symbol, updatedPrice);
+  const existingTicker = tickers.get(symbol) as Ticker;
+  tickers.set(symbol, { ...existingTicker, price: updatedPrice });
 
   return updatedPrice;
 }

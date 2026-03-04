@@ -18,12 +18,12 @@ export function setupWebSocket(server: http.Server) {
     // Start streaming prices every second
     const interval = setInterval(() => {
       try {
-        getTickers().forEach((symbol) => {
-          const price = simulatePriceUpdate(symbol);
+        getTickers().forEach((ticker) => {
+          const price = simulatePriceUpdate(ticker.symbol);
 
           ws.send(
             JSON.stringify({
-              symbol,
+              symbol: ticker.symbol,
               price,
             })
           );
