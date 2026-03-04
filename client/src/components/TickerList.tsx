@@ -4,9 +4,10 @@ import type { Ticker } from "../types/market";
 
 interface Props {
   onSelect: (symbol: string) => void;
+  selectedSymbol: string | null;
 }
 
-const TickerList = ({ onSelect }: Props) => {
+const TickerList = ({ onSelect, selectedSymbol }: Props) => {
   const [tickers, setTickers] = useState<Ticker[]>([]);
 
   useEffect(() => {
@@ -25,9 +26,11 @@ const TickerList = ({ onSelect }: Props) => {
         <div
           key={ticker.symbol}
           style={{
-            padding: "8px",
+            padding: "10px",
             cursor: "pointer",
-            borderBottom: "1px solid #ccc",
+            borderBottom: "1px solid #ddd",
+            backgroundColor: selectedSymbol === ticker.symbol ? "#e6f0ff" : "white",
+            fontWeight: selectedSymbol === ticker.symbol ? "bold" : "normal",
           }}
           onClick={() => onSelect(ticker.symbol)}
         >

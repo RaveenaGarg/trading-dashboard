@@ -9,7 +9,7 @@ function App() {
   return (
     <div style={{ display: "flex", height: "100vh", fontFamily: "Arial, sans-serif" }}>
       <div style={{ width: "25%", borderRight: "1px solid #ddd", overflowY: "auto", padding: "20px", backgroundColor: "#fafafa" }}>
-        <TickerList onSelect={setSelectedSymbol} />
+        <TickerList onSelect={setSelectedSymbol} selectedSymbol={selectedSymbol}/>
       </div>
 
       <div style={{ width: "75%", padding: "30px" }}>
