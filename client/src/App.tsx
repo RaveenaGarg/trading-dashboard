@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import TickerList from "./components/TickerList";
+import PriceChart from "./components/PriceChart";
+import LivePrice from "./components/LivePrice";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{ display: "flex", padding: "20px" }}>
+      <div style={{ width: "30%", borderRight: "1px solid #ddd" }}>
+        <TickerList onSelect={setSelectedSymbol} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      <div style={{ width: "70%", padding: "20px" }}>
+        {selectedSymbol ? (
+          <>
+            <LivePrice symbol={selectedSymbol} />
+            <PriceChart symbol={selectedSymbol} />
+          </>
+        ) : (
+          <h2>Select a ticker</h2>
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
